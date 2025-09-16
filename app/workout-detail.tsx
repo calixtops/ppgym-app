@@ -90,6 +90,7 @@ export default function WorkoutDetailScreen() {
     startWorkoutSession,
     completeSet,
     updateExerciseWeight,
+    updateWorkoutProgress,
     completeWorkout,
     workoutSessions,
     getNextWorkoutTemplate,
@@ -143,12 +144,8 @@ export default function WorkoutDetailScreen() {
         
         session.exercises.forEach(exercise => {
           // Cria array de booleans baseado em completedSets
-          const sets = new Array(exercise.sets).fill(false);
-          exercise.completedSets?.forEach(setIndex => {
-            if (setIndex < sets.length) {
-              sets[setIndex] = true;
-            }
-          });
+          // completedSets é um array como [0, 1, 0, 0] onde 1 = completado
+          const sets = exercise.completedSets?.map(value => value === 1) || new Array(exercise.sets).fill(false);
           
           initialSets[exercise.exerciseId] = sets;
           initialWeights[exercise.exerciseId] = exercise.weight || 0;
@@ -187,12 +184,8 @@ export default function WorkoutDetailScreen() {
         // Atualiza estados locais com dados do hook
         const newSets: { [exerciseId: string]: boolean[] } = {};
         updatedSession.exercises.forEach(exercise => {
-          const sets = new Array(exercise.sets).fill(false);
-          exercise.completedSets?.forEach(setIndex => {
-            if (setIndex < sets.length) {
-              sets[setIndex] = true;
-            }
-          });
+          // Converte completedSets [0,1,0,0] para array de booleans [false,true,false,false]
+          const sets = exercise.completedSets?.map(value => value === 1) || new Array(exercise.sets).fill(false);
           newSets[exercise.exerciseId] = sets;
         });
         setSetsCompleted(newSets);
@@ -220,20 +213,24 @@ export default function WorkoutDetailScreen() {
       return;
     }
     
-    // Atualiza estado local imediatamente (como no teste que funciona)
+    // Pega o estado atual da série
+    const currentSets = setsCompleted[exerciseId] || [];
+    const wasCompleted = currentSets[setIndex] || false;
+    const willBeCompleted = !wasCompleted;
+    
+    // Atualiza estado local imediatamente
     setSetsCompleted(prev => {
       const exerciseSets = [...(prev[exerciseId] || [])];
-      exerciseSets[setIndex] = !exerciseSets[setIndex];
+      exerciseSets[setIndex] = willBeCompleted;
       console.log('✅ Set toggled locally:', exerciseSets);
       return { ...prev, [exerciseId]: exerciseSets };
     });
     
-    // Atualiza no hook global
-    completeSet(currentSession.id, exerciseId, setIndex);
+    // Atualiza no hook global com o valor correto
+    updateWorkoutProgress(currentSession.id, exerciseId, setIndex, willBeCompleted);
     
-    // Sempre mostrar timer de descanso quando uma série for completada
-    const currentSets = setsCompleted[exerciseId] || [];
-    if (!currentSets[setIndex]) {
+    // Mostrar timer de descanso quando uma série for completada
+    if (willBeCompleted) {
       setShowRestTimer(true);
     }
   };
