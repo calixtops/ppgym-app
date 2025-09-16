@@ -1,11 +1,11 @@
 // Fallback for using MaterialIcons on Android and web.
 
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { SymbolWeight, SymbolViewProps } from 'expo-symbols';
+import { SymbolWeight } from 'expo-symbols';
 import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
-type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>;
+type IconMapping = Record<string, ComponentProps<typeof MaterialIcons>['name']>;
 type IconSymbolName = keyof typeof MAPPING;
 
 /**
@@ -18,6 +18,36 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'chevron.left': 'chevron-left',
+  'play': 'play-arrow',
+  'play.fill': 'play-arrow',
+  'pause': 'pause',
+  'pause.fill': 'pause',
+  'stop': 'stop',
+  'xmark': 'close',
+  'checkmark': 'check',
+  'checkmark.circle.fill': 'check-circle',
+  'clock': 'access-time',
+  'clock.fill': 'access-time',
+  'calendar': 'calendar-today',
+  'chart.bar.fill': 'bar-chart',
+  'trophy.fill': 'emoji-events',
+  'list.bullet': 'format-list-bulleted',
+  'person.circle.fill': 'account-circle',
+  'dumbbell': 'fitness-center',
+  'dumbbell.fill': 'fitness-center',
+  'pencil': 'edit',
+  'plus': 'add',
+  'minus': 'remove',
+  'trash': 'delete',
+  'edit': 'edit',
+  'info': 'info',
+  'warning': 'warning',
+  'error': 'error',
+  'success': 'check-circle',
+  'play.circle.fill': 'play-circle-filled',
+  'pause.circle.fill': 'pause-circle-filled',
+  'stop.circle.fill': 'stop-circle',
 } as IconMapping;
 
 /**

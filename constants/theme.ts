@@ -1,29 +1,99 @@
 /**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
+ * PPGym App Theme Configuration
+ * Modern and elegant color scheme for fitness tracking app
  */
 
 import { Platform } from 'react-native';
 
-const tintColorLight = '#0a7ea4';
-const tintColorDark = '#fff';
+const tintColorLight = '#f25924'; // Orange accent
+const tintColorDark = '#f25924'; // Orange accent
 
 export const Colors = {
   light: {
-    text: '#11181C',
-    background: '#fff',
+    text: '#1a1a1a', // Darker text for better contrast
+    textSecondary: '#6b7280', // Gray-500
+    background: '#fafafa', // Slightly off-white
+    backgroundSecondary: '#f5f5f5', // Light gray
+    surface: '#ffffff',
+    surfaceSecondary: '#f8f9fa', // Very light gray
     tint: tintColorLight,
-    icon: '#687076',
-    tabIconDefault: '#687076',
+    primary: '#f25924', // Orange accent
+    secondary: '#2f2b36', // Dark base
+    success: '#10b981', // Emerald-500
+    warning: '#f59e0b', // Amber-500
+    error: '#ef4444', // Red-500
+    icon: '#6b7280', // Gray-500
+    iconActive: tintColorLight,
+    border: '#e1e5e9', // Slightly darker border
+    tabIconDefault: '#9ca3af', // Gray-400
     tabIconSelected: tintColorLight,
+    card: '#ffffff',
+    cardShadow: 'rgba(0, 0, 0, 0.08)',
   },
   dark: {
-    text: '#ECEDEE',
-    background: '#151718',
+    text: '#ffffff', // Pure white for better contrast
+    textSecondary: '#b0b0b0', // Light gray
+    background: '#1a1a1a', // Very dark background
+    backgroundSecondary: '#2a2a2a', // Slightly lighter
+    surface: '#2f2b36', // Dark surface
+    surfaceSecondary: '#3a3441', // Secondary surface
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    primary: '#f25924', // Orange accent
+    secondary: '#3a3441', // Secondary surface color
+    success: '#34d399', // Emerald-400
+    warning: '#fbbf24', // Amber-400
+    error: '#f87171', // Red-400
+    icon: '#b0b0b0', // Light gray
+    iconActive: tintColorDark,
+    border: '#404040', // Dark border
+    tabIconDefault: '#6b7280', // Gray-500
     tabIconSelected: tintColorDark,
+    card: '#2f2b36', // Card background
+    cardShadow: 'rgba(0, 0, 0, 0.4)',
+  },
+};
+
+export const Spacing = {
+  xs: 4,
+  sm: 8,
+  md: 16,
+  lg: 24,
+  xl: 32,
+  xxl: 48,
+};
+
+export const BorderRadius = {
+  sm: 2,
+  md: 4,
+  lg: 6,
+  xl: 8,
+  xxl: 12,
+  full: 9999,
+};
+
+export const Typography = {
+  fontSizes: {
+    xs: 12,
+    sm: 14,
+    md: 16,
+    lg: 18,
+    xl: 20,
+    xxl: 24,
+    xxxl: 30,
+  },
+  fontWeights: {
+    normal: '400' as const,
+    medium: '500' as const,
+    semibold: '600' as const,
+    bold: '700' as const,
+  },
+  lineHeights: {
+    xs: 16,
+    sm: 20,
+    md: 24,
+    lg: 28,
+    xl: 32,
+    xxl: 36,
   },
 };
 
